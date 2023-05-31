@@ -1,5 +1,5 @@
 // Polyfill for Reduce
-
+let arr = [1, 2, 3, 4, 5];
 function customReduceMethod(reduceCb, acc) {
   let res = acc;
   for (let i = 0; i < this.length; i++) {
@@ -10,7 +10,7 @@ function customReduceMethod(reduceCb, acc) {
 Array.prototype.cutomReduce = customReduceMethod;
 
 const reduceCb = (sum, item) => {
-  return (sum += item);
+  return sum + item;
 };
 console.log(arr.cutomReduce(reduceCb, 0));
 
