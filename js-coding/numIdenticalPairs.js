@@ -17,12 +17,39 @@ var numIdenticalPairs = function (nums) {
     return acc;
   }, {});
   let res = 0;
-  for (const [, value] of Object.entries(eachNumberCount)) {
+
+  // Object.values return an array method-1
+  Object.values(eachNumberCount).map((value) => {
     if (value !== 1) {
       res += (value * (value - 1)) / 2;
     }
-  }
+  });
+
+  // method -2
+  /*   for (const [, value] of Object.entries(eachNumberCount)) {
+      if (value !== 1) {
+        res += (value * (value - 1)) / 2;
+      }
+    } */
+  return res;
+};
+
+var numIdenticalPairsModify = function (nums) {
+  let res = 0;
+  Object.values(
+    // reduce will return an object -> Object.values(object_name).map()....
+    nums.reduce((acc, num) => {
+      if (acc[num]) acc[num]++;
+      else acc[num] = 1;
+      return acc;
+    }, {})
+  ).map((value) => {
+    if (value !== 1) {
+      res += (value * (value - 1)) / 2;
+    }
+  });
   return res;
 };
 
 console.log(numIdenticalPairs([1, 2, 3, 1, 1, 3]));
+console.log(numIdenticalPairsModify([1, 2, 3, 1, 1, 3]));
