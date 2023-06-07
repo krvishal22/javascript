@@ -16,8 +16,12 @@ Kid 1 will always have the greatest number of candies, even if a different kid i
 var kidsWithCandies = function (candies, extraCandies) {
   const maxValue = Math.max(...candies);
   const result = candies.reduce((acc, item) => {
+    /* 
     if (item + extraCandies >= maxValue) acc.push(true);
-    else acc.push(false);
+    else acc.push(false); 
+    this can be modify to one line
+    */
+    acc.push(item + extraCandies >= maxValue);
     return acc;
   }, []);
   return result;

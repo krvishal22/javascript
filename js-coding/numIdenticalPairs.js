@@ -37,7 +37,7 @@ var numIdenticalPairs = function (nums) {
 var numIdenticalPairsModify = function (nums) {
   let res = 0;
   Object.values(
-    // reduce will return an object -> Object.values(object_name).map()....
+  // reduce will return an object -> Object.values(object_name).map()....
     nums.reduce((acc, num) => {
       if (acc[num]) acc[num]++;
       else acc[num] = 1;
@@ -51,5 +51,28 @@ var numIdenticalPairsModify = function (nums) {
   return res;
 };
 
+var numIdenticalPairsFinalApproach = function (nums) {
+  let res = 0;
+  nums
+    .reduce((acc, num) => {
+      const existingItem = acc.find(
+        (currentValue) => currentValue.item === num
+      );
+      if (existingItem) {
+        existingItem.count += 1;
+      } else {
+        acc.push({ item: num, count: 1 });
+      }
+      return acc;
+    }, [])
+    .map((value) => {
+      if (value.count !== 1) {
+        res += (value.count * (value.count - 1)) / 2;
+      }
+    });
+  return res;
+};
+
 console.log(numIdenticalPairs([1, 2, 3, 1, 1, 3]));
 console.log(numIdenticalPairsModify([1, 2, 3, 1, 1, 3]));
+console.log(numIdenticalPairsFinalApproach([1, 2, 3, 1, 1, 3]));
