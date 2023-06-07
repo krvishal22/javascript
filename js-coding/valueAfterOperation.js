@@ -7,18 +7,29 @@ Initially, the value of X is 0.
 Given an array of strings operations containing a list of operations, 
 return the final value of X after performing all the operations. */
 
-
-
 const finalValueAfterOperations = function (operations) {
-    const result = operations.reduce((acc, str) => {
-        if (str === "X++" || str === "++X")
-            acc = acc + 1
-        else {
-            acc = acc - 1
-        }
-        return acc;
-    },0)
-    return result;
+  const result = operations.reduce((acc, str) => {
+    if (str === "X++" || str === "++X") acc = acc + 1;
+    else {
+      acc = acc - 1;
+    }
+    return acc;
+  }, 0);
+  return result;
 };
 
-console.log(finalValueAfterOperations(["X++","++X","--X","X--"]))
+
+const finalValueAfterOperationsModify = function (operations) {
+  const result = operations.reduce((acc, str) => {
+    // why to compare whole string 
+    if (str[1] === "+") acc += 1;
+    else {
+      acc -= 1;
+    }
+    return acc;
+  }, 0);
+  return result;
+};
+
+console.log(finalValueAfterOperations(["X++", "++X", "--X", "X--"]));
+console.log(finalValueAfterOperationsModify(["X++", "++X", "--X", "X--"]));
